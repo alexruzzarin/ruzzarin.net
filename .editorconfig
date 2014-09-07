@@ -1,21 +1,49 @@
-# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors and IDEs
-# editorconfig.org
+# EditorConfig is awesome: http://EditorConfig.org
 
+# Howto with your editor:
+#   Sublime: https://github.com/sindresorhus/editorconfig-sublime
+
+# top-most EditorConfig file
 root = true
 
+# Unix-style newlines with a newline ending every file
+[**]
+end_of_line = lf
+insert_final_newline = true
 
-[*]
+# Standard at: https://github.com/felixge/node-style-guide 
+[**.js, **.json]
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 80
+quote_type = single
+curly_bracket_next_line = false
+spaces_around_operators = true
+space_after_control_statements = true
+space_after_anonymous_functions = false
+spaces_in_brackets = false
 
-# Change these settings to your own preference
+# https://github.com/jedmao/codepainter
+[node_modules/**.js]
+codepaint = false
+
+# No Standard.  Please document a standard if different from .js
+[**.yml, **.html, **.css]
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# No standard.  Please document a standard if different from .js
+[**.md]
+indent_style = space
+
+# Standard at:
+[**.py]
 indent_style = space
 indent_size = 4
 
-# We recommend you to keep these unchanged
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[*.md]
-trim_trailing_whitespace = false
+# Standard at: 
+[Makefile]
+indent_style = tab
+indent_size = 8
