@@ -6,7 +6,7 @@
     "alexruzzarin <alex@ruzzarin.net>"
   ],
   "description": "My personal website.",
-  "license": "MIT",
+  "license": "ISC",
   "private": true,
   "ignore": [
     "**/.*",
