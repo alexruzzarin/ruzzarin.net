@@ -10,19 +10,11 @@ module.exports = function(grunt) {
     },
     vendor: {
       client: {
-        js: ['bower_components\jquery\dist\jquery.js',
-             'bower_components\bootstrap\dist\js\bootstrap.js'],
-        css: ['bower_components\bootstrap\dist\css\bootstrap.css'],
-        font: ['bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.eot',
-               'bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg',
-               'bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf',
-               'bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff']
+        js: ['bower_components/jquery/public/jquery.js',
+             'bower_components/bootstrap/public/js/bootstrap.js'],
+        css: ['bower_components/bootstrap/public/css/bootstrap.css'],
+        font: ['bower_components/bootstrap/public/fonts/**']
       }
-    },
-    tasks: {
-      js:['jshint', 'uglify'],
-      css:['less', 'cssc', 'cssmin'],
-      html:['htmlhint']
     }
   };
 
@@ -47,6 +39,17 @@ module.exports = function(grunt) {
         src: appConfig.src.client.html
       }
     },
+    htmlmin: {
+      app: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          'public/index.html': appConfig.src.client.html[0]
+        }
+      }
+    },
     jshint: {
       // You get to make the name
       // The paths tell JSHint which files to validate
@@ -55,19 +58,19 @@ module.exports = function(grunt) {
     uglify: {
       app: {
         files: {
-          'dist/script/app.js': appConfig.src.client.js
+          'public/script/app.js': appConfig.src.client.js
         }
       },
       vendor: {
         files: {
-          'dist/script/vendor.js': appConfig.vendor.client.js
+          'public/script/vendor.js': appConfig.vendor.client.js
         }
       }
     },
     less: {
       app: {
         src: appConfig.src.client.css,
-        dest: 'dist/style/app.css'
+        dest: 'public/style/app.css'
       }
     },
     cssc: {
@@ -78,42 +81,93 @@ module.exports = function(grunt) {
           consolidateMediaQueries: true
         },
         files: {
-            'dist/style/app.css': 'dist/style/app.css'
+            'public/style/app.css': 'public/style/app.css'
         }
       }
     },
     cssmin: {
       app: {
-        src: 'dist/style/app.css',
-        dest: 'dist/style/app.css'
+        src: 'public/style/app.css',
+        dest: 'public/style/app.css'
       },
       vendor: {
         files: {
-          'dist/style/vendor.css': appConfig.vendor.client.css
+          'public/style/vendor.css': appConfig.vendor.client.css
         }
+      }
+    },
+    copy: {
+      vendor: {
+        files: [
+          {expand: true, src: appConfig.vendor.client.font, dest: 'public/font/'},
+        ]
+      }
+    },
+    clean: {
+      options: {
+        force: true
+      },
+      app: {
+        src: ["public/**"]
       }
     },
     watch: {
       options: {
-        livereload: true,
+        livereload: true
       },
       html: {
         files: appConfig.src.client.html,
-        tasks: appConfig.tasks.html
+        tasks: ['appHtml'],
+        options: {
+          livereload: true,
+        }
       },
       js: {
         files: appConfig.src.client.js,
-        tasks: appConfig.tasks.js
+        tasks: ['appJs'],
+        options: {
+          livereload: true,
+        }
       },
       css: {
         files: appConfig.src.client.css,
-        tasks: appConfig.tasks.css
+        tasks: ['appCss'],
+        options: {
+          livereload: true,
+        }
+      }
+    },
+    connect: {
+      app: {
+        options: {
+          port: 9000,
+          base: 'public'
+        }
       }
     }
-
   });
 
-  // Default task(s).
-  grunt.registerTask('default', appConfig.tasks.html.concat(appConfig.tasks.js).concat(appConfig.tasks.css));
+  grunt.registerTask('appHtml', ['htmlhint:app','htmlmin:app']);
+  grunt.registerTask('appCss', ['less:app','cssc:app','cssmin:app']);
+  grunt.registerTask('appJs', ['jshint:app','uglify:app']);
 
+  grunt.registerTask('vendorCss', ['cssmin:vendor']);
+  grunt.registerTask('vendorJs', ['uglify:vendor']);
+  grunt.registerTask('vendorFont', ['copy:vendor']);
+
+  grunt.registerTask('default', ['clean','appHtml','appCss','appJs','vendorCss','vendorJs','vendorFont']);
+
+  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+    grunt.task.run([
+      'default',
+      'connect:app',
+      'watch'
+    ]);
+  });
+
+  grunt.registerTask('showVars', 'appConfig', function (target) {
+    console.log(appConfig);
+    console.log('-------------------------------------');
+    console.log(appConfig.vendor.client.js);
+  });
 };
