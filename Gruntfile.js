@@ -2,19 +2,15 @@ module.exports = function(grunt) {
 
   var appConfig = {
     src: {
-      client: {
-        js: ['app/script/**/*.js'],
-        css: ['app/style/**/*.less'],
-        html: ['app/**/*.html']
-      }
+      js: ['app/script/**/*.js'],
+      css: ['app/style/**/*.less'],
+      html: ['app/**/*.html']
     },
     vendor: {
-      client: {
-        js: ['bower_components/jquery/public/jquery.js',
-             'bower_components/bootstrap/public/js/bootstrap.js'],
-        css: ['bower_components/bootstrap/public/css/bootstrap.css'],
-        font: ['bower_components/bootstrap/public/fonts/**']
-      }
+      js: ['bower_components/jquery/dist/jquery.js',
+           'bower_components/bootstrap/dist/js/bootstrap.js'],
+      css: ['bower_components/bootstrap/dist/css/bootstrap.css'],
+      font: ['bower_components/bootstrap/dist/fonts/**']
     }
   };
 
@@ -36,7 +32,7 @@ module.exports = function(grunt) {
             'head-script-disabled': true,
             'style-disabled': true
         },
-        src: appConfig.src.client.html
+        src: appConfig.src.html
       }
     },
     htmlmin: {
@@ -46,30 +42,30 @@ module.exports = function(grunt) {
           collapseWhitespace: true
         },
         files: {
-          'public/index.html': appConfig.src.client.html[0]
+          'public/index.html': appConfig.src.html[0]
         }
       }
     },
     jshint: {
       // You get to make the name
       // The paths tell JSHint which files to validate
-      app: appConfig.src.client.js
+      app: appConfig.src.js
     },
     uglify: {
       app: {
         files: {
-          'public/script/app.js': appConfig.src.client.js
+          'public/script/app.js': appConfig.src.js
         }
       },
       vendor: {
         files: {
-          'public/script/vendor.js': appConfig.vendor.client.js
+          'public/script/vendor.js': appConfig.vendor.js
         }
       }
     },
     less: {
       app: {
-        src: appConfig.src.client.css,
+        src: appConfig.src.css,
         dest: 'public/style/app.css'
       }
     },
@@ -92,14 +88,14 @@ module.exports = function(grunt) {
       },
       vendor: {
         files: {
-          'public/style/vendor.css': appConfig.vendor.client.css
+          'public/style/vendor.css': appConfig.vendor.css
         }
       }
     },
     copy: {
       vendor: {
         files: [
-          {expand: true, src: appConfig.vendor.client.font, dest: 'public/font/'},
+          {expand: true, src: appConfig.vendor.font, dest: 'public/font/'},
         ]
       }
     },
@@ -116,21 +112,21 @@ module.exports = function(grunt) {
         livereload: true
       },
       html: {
-        files: appConfig.src.client.html,
+        files: appConfig.src.html,
         tasks: ['appHtml'],
         options: {
           livereload: true,
         }
       },
       js: {
-        files: appConfig.src.client.js,
+        files: appConfig.src.js,
         tasks: ['appJs'],
         options: {
           livereload: true,
         }
       },
       css: {
-        files: appConfig.src.client.css,
+        files: appConfig.src.css,
         tasks: ['appCss'],
         options: {
           livereload: true,
@@ -163,11 +159,5 @@ module.exports = function(grunt) {
       'connect:app',
       'watch'
     ]);
-  });
-
-  grunt.registerTask('showVars', 'appConfig', function (target) {
-    console.log(appConfig);
-    console.log('-------------------------------------');
-    console.log(appConfig.vendor.client.js);
   });
 };
