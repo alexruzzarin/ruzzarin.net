@@ -95,7 +95,7 @@ module.exports = function(grunt) {
     copy: {
       vendor: {
         files: [
-          {expand: true, src: appConfig.vendor.font, dest: 'public/font/'},
+          {expand: true, src: appConfig.vendor.font, dest: 'public/fonts/', flatten: true, filter: 'isFile'},
         ]
       }
     },

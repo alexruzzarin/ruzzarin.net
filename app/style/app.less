@@ -1,4 +1,7 @@
-@blue: #2980b9;
+@blue1: #3498db;
+@blue2: #2980b9;
+@blue3: #34495e;
+@blue4: #2c3e50;
 @bodyBackground: #7f8c8d;
 @background: #fff;
 @foreground: #000;
@@ -6,7 +9,36 @@ body{
   background-color: @bodyBackground;
   color: @foreground;
 }
-.container{
+header{
   margin-top: 60px;
+  font-family: Montserrat;
+}
+.container{
   background-color: @background;
+}
+header .container{
+  background-color: @blue4;
+}
+header.navbar{
+  margin-bottom:0;
+  border-width:0;
+}
+header .navbar-brand{
+  font-size:24px;
+}
+header, header a{
+  color: @background;
+  text-transform: uppercase;
+}
+.nav li{
+  text-align:center;
+}
+.nav li:first-child{
+  background-color: @blue1;
+}
+.nav li:nth-child(2){
+  background-color: @blue2;
+}
+.nav li:nth-child(3){
+  background-color: @blue3;
 }
