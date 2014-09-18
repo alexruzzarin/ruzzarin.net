@@ -4,7 +4,8 @@ module.exports = function(grunt) {
     src: {
       js: ['app/script/**/*.js'],
       css: ['app/style/**/*.less'],
-      html: ['app/**/*.html']
+      html: ['app/**/*.html'],
+      image: ['app/image/**/*.*']
     },
     vendor: {
       js: ['bower_components/jquery/dist/jquery.js',
@@ -97,6 +98,11 @@ module.exports = function(grunt) {
         files: [
           {expand: true, src: appConfig.vendor.font, dest: 'public/fonts/', flatten: true, filter: 'isFile'},
         ]
+      },
+      app: {
+        files: [
+          {expand: true, src: appConfig.src.image, dest: 'public/image/', flatten: true, filter: 'isFile'},
+        ]
       }
     },
     clean: {
@@ -131,6 +137,13 @@ module.exports = function(grunt) {
         options: {
           livereload: true,
         }
+      },
+      image: {
+        files: appConfig.src.image,
+        tasks: ['appImage'],
+        options: {
+          livereload: true,
+        }
       }
     },
     connect: {
@@ -146,12 +159,13 @@ module.exports = function(grunt) {
   grunt.registerTask('appHtml', ['htmlhint:app','htmlmin:app']);
   grunt.registerTask('appCss', ['less:app','cssc:app','cssmin:app']);
   grunt.registerTask('appJs', ['jshint:app','uglify:app']);
+  grunt.registerTask('appImage', ['copy:app']);
 
   grunt.registerTask('vendorCss', ['cssmin:vendor']);
   grunt.registerTask('vendorJs', ['uglify:vendor']);
   grunt.registerTask('vendorFont', ['copy:vendor']);
 
-  grunt.registerTask('default', ['clean','appHtml','appCss','appJs','vendorCss','vendorJs','vendorFont']);
+  grunt.registerTask('default', ['clean','appHtml','appCss','appJs','appImage','vendorCss','vendorJs','vendorFont']);
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     grunt.task.run([

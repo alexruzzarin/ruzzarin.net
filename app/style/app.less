@@ -5,23 +5,26 @@
 @bodyBackground: #7f8c8d;
 @background: #fff;
 @foreground: #000;
+@screen-sm-min: 768px;
+@screen-md-min: 992px;
+@screen-lg-min: 1200px;
 body{
   background-color: @bodyBackground;
   color: @foreground;
 }
 header{
-  margin-top: 60px;
+  margin-top: 50px;
   font-family: Montserrat;
+  &.navbar{
+    margin-bottom:0;
+    border-width:0;
+  }
+  .container{
+    background-color: @blue4;
+  }
 }
 .container{
   background-color: @background;
-}
-header .container{
-  background-color: @blue4;
-}
-header.navbar{
-  margin-bottom:0;
-  border-width:0;
 }
 header, header a{
   color: @background;
@@ -54,6 +57,8 @@ header, header a{
   }
   &.active{
     background-color: @background;
+    margin-top: -5px;
+    padding-top: 5px;
     a{
       color: @blue4;
     }
@@ -72,5 +77,19 @@ header, header a{
         color: @blue3;
       }
     }
+  }
+}
+.banner{
+  @media (min-width: @screen-sm-min) {
+    height: 257px;
+    background-image: url('../image/banner-sm.jpg');
+  }
+  @media (min-width: @screen-md-min) {
+    height: 332px;
+    background-image: url('../image/banner-md.jpg');
+  }
+  @media (min-width: @screen-lg-min) {
+    height: 400px;
+    background-image: url('../image/banner-lg.jpg');
   }
 }
