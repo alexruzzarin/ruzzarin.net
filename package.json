@@ -30,5 +30,9 @@
     "grunt-cssc": "^0.2.6",
     "grunt-htmlhint": "^0.4.1",
     "matchdep": "^0.3.0"
+  },
+  "dependencies": {
+    "compression": "^1.1.0",
+    "express": "^4.9.4"
   }
 }
