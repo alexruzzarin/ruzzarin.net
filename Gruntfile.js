@@ -10,8 +10,10 @@ module.exports = function(grunt) {
     vendor: {
       js: ['bower_components/jquery/dist/jquery.js',
            'bower_components/bootstrap/dist/js/bootstrap.js'],
-      css: ['bower_components/bootstrap/dist/css/bootstrap.css'],
-      font: ['bower_components/bootstrap/dist/fonts/**']
+      css: ['bower_components/bootstrap/dist/css/bootstrap.css',
+            'bower_components/Font-Awesome/css/font-awesome.css'],
+      font: ['bower_components/bootstrap/dist/fonts/**',
+             'bower_components/Font-Awesome/fonts/**']
     }
   };
 
@@ -96,7 +98,7 @@ module.exports = function(grunt) {
     copy: {
       vendor: {
         files: [
-          {expand: true, src: appConfig.vendor.font, dest: 'public/fonts/', flatten: true, filter: 'isFile'},
+          {expand: true, src: appConfig.vendor.font, dest: 'public/fonts/', flatten: true, filter: 'isFile'}
         ]
       },
       app: {
