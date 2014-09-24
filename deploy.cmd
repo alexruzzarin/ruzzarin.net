@@ -114,10 +114,10 @@ IF EXIST "%DEPLOYMENT_TARGET%\bower.json" (
   popd
 )
 
-:: 3. Execute grunt release task
+:: 5. Execute grunt release task
 IF EXIST "%DEPLOYMENT_TARGET%\Gruntfile.js" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install grunt
+  call :ExecuteCmd !NPM_CMD! install grunt-cli
   call :ExecuteCmd ./node_modules/.bin/grunt --no-color default
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
