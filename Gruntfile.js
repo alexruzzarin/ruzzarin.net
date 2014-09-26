@@ -137,7 +137,7 @@ module.exports = function(grunt) {
         livereload: true
       },
       html: {
-        files: appConfig.src.html,
+        files: ['app/index.ect'],
         tasks: ['appHtml'],
         options: {
           livereload: true,
