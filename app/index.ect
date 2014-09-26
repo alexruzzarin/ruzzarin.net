@@ -66,6 +66,8 @@ Active participant in the community, loves go to Coding Dojos and conferences, a
 
     <script src="script/vendor.js"></script>
     <script src="script/app.js"></script>
-    <script src="//localhost:35729/livereload.js"></script>
+    <% if @env != 'production' : %>
+      <script src="//localhost:35729/livereload.js"></script>
+    <% end %>
   </body>
 </html>

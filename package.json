@@ -28,6 +28,7 @@
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-cssc": "^0.2.6",
+    "grunt-ect": "^0.1.2",
     "grunt-htmlhint": "^0.4.1",
     "matchdep": "^0.3.0"
   },

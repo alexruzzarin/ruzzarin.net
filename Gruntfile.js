@@ -4,7 +4,6 @@ module.exports = function(grunt) {
     src: {
       js: ['app/script/**/*.js'],
       css: ['app/style/**/*.less'],
-      html: ['app/**/*.html'],
       image: ['app/image/**/*.*']
     },
     vendor: {
@@ -22,6 +21,18 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    ect: {
+      app: {
+        options: {
+          variables: {
+            env: process.env.NODE_ENV
+          }
+        },
+        files: {
+          'public/index.html': 'app/index.ect',
+        }
+      }
+    },
     htmlhint: {
       app: {
         options: {
@@ -35,7 +46,7 @@ module.exports = function(grunt) {
             'head-script-disabled': true,
             'style-disabled': true
         },
-        src: appConfig.src.html
+        src: 'public/index.html'
       }
     },
     htmlmin: {
@@ -45,7 +56,7 @@ module.exports = function(grunt) {
           collapseWhitespace: true
         },
         files: {
-          'public/index.html': appConfig.src.html[0]
+          'public/index.html': 'public/index.html'
         }
       }
     },
@@ -158,7 +169,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('appHtml', ['htmlhint:app','htmlmin:app']);
+  grunt.registerTask('appHtml', ['ect:app','htmlhint:app','htmlmin:app']);
   grunt.registerTask('appCss', ['less:app','cssc:app','cssmin:app']);
   grunt.registerTask('appJs', ['jshint:app','uglify:app']);
   grunt.registerTask('appImage', ['copy:app']);
