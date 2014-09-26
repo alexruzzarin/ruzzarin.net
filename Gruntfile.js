@@ -25,7 +25,13 @@ module.exports = function(grunt) {
       app: {
         options: {
           variables: {
-            env: process.env.NODE_ENV
+            env: process.env.NODE_ENV,
+            name: "Alex Ruzzarin",
+            title: "Alex Ruzzarin - Software Developer",
+            description: "Programmer with degree in Analysis and Development of Information Systems. Professional and trainer certified by Microsoft. Crazy for technology, works with. Net, but is a fan of Ruby and JavaScript (and Node.Js).",
+            image: "http://www.ruzzarin.net/images/Alex-Ruzzarin.jpg",
+            keywords: "HTML,CSS,JavaScript,.net,dotnet,node,nodejs,node.js,asp.net,aspnet",
+            googlePlusUrl: "https://plus.google.com/+AlexRuzzarin/posts"
           }
         },
         files: {
