@@ -141,7 +141,13 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, src: ['app/images/**/*.*'], dest: 'public/images/', flatten: true, filter: 'isFile'}
                 ]
+            },
+            newRelic: {
+                files: [
+                    {src: 'node_modules/newrelic/lib/config.default.js', dest: 'newrelic.js'}
+                ]
             }
+
         },
         clean: {
             options: {
