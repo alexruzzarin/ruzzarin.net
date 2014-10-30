@@ -18,6 +18,8 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "Font-Awesome": "~4.2.0",
-    "fallback": "~1.1.5"
+    "fallback": "~1.1.5",
+    "angular": "~1.2.26",
+    "angular-route": "~1.2.26"
   }
 }

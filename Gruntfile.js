@@ -18,9 +18,19 @@ module.exports = function (grunt) {
                         googlePlusUrl: "https://plus.google.com/+AlexRuzzarin/posts"
                     }
                 },
-                files: {
-                    'public/index.html': 'app/index.ect'
-                }
+                files: [
+                    {
+                        src: ['app/index.ect'],
+                        dest: 'public/index.html'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'app/partials',
+                        src: '**/*.ect',
+                        dest: 'public/partials',
+                        ext: '.html'
+                    }
+                ]
             }
         },
         htmlhint: {
@@ -55,9 +65,9 @@ module.exports = function (grunt) {
             // The paths tell JSHint which files to validate
             appJs: ['app/script/**/*.js']
         },
-        concat:{
+        concat: {
             appJs: {
-                src: ['app/script/**/*.js'],
+                src: ['app/script/module.js', 'app/script/**/*.js'],
                 dest: 'public/js/app.js'
             }
         },
@@ -95,19 +105,36 @@ module.exports = function (grunt) {
         copy: {
             vendorFonts: {
                 files: [
-                    {expand: true, src: ['bower_components/bootstrap/dist/fonts/**',
-                        'bower_components/Font-Awesome/fonts/**'], dest: 'public/fonts/', flatten: true, filter: 'isFile'}
+                    {
+                        expand: true,
+                        src: ['bower_components/bootstrap/dist/fonts/**',
+                            'bower_components/Font-Awesome/fonts/**'],
+                        dest: 'public/fonts/',
+                        flatten: true,
+                        filter: 'isFile'
+                    }
                 ]
             },
             vendorCss: {
                 files: [
-                    {src: 'bower_components/bootstrap/dist/css/bootstrap.min.css', dest: 'public/css/bootstrap.min.css'},
-                    {src: 'bower_components/Font-Awesome/css/font-awesome.min.css', dest: 'public/css/font-awesome.min.css'}
+                    {
+                        src: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
+                        dest: 'public/css/bootstrap.min.css'
+                    },
+                    {
+                        src: 'bower_components/Font-Awesome/css/font-awesome.min.css',
+                        dest: 'public/css/font-awesome.min.css'
+                    }
                 ]
             },
             vendorJs: {
                 files: [
-                    {src: 'bower_components/fallback/fallback.min.js', dest: 'public/js/fallback.min.js'}
+                    {src: 'bower_components/fallback/fallback.min.js', dest: 'public/js/fallback.min.js'},
+                    {src: 'bower_components/angular/angular.min.js', dest: 'public/js/angular.min.js'},
+                    {
+                        src: 'bower_components/angular-route/angular-route.min.js',
+                        dest: 'public/js/angular-route.min.js'
+                    },
                 ]
             },
             appImages: {
@@ -129,7 +156,7 @@ module.exports = function (grunt) {
                 livereload: true
             },
             html: {
-                files: ['app/index.ect'],
+                files: ['app/index.ect', 'app/partials/**/*.ect'],
                 tasks: ['appHtml'],
                 options: {
                     livereload: true
@@ -155,13 +182,22 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true
                 }
+            },
+            express: {
+                files: ['server.js'],
+                tasks: ['express:app'],
+                options: {
+                    livereload: true,
+                    spawn: false
+                }
             }
         },
-        connect: {
+        express: {
             app: {
                 options: {
-                    port: 9000,
-                    base: 'public'
+                    script: 'server.js',
+                    node_env: 'development',
+                    port: 3000
                 }
             }
         }
@@ -185,11 +221,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('release', ['clean', 'releaseAppHtml', 'releaseAppCss', 'releaseAppJs', 'releaseAppImages', 'vendorCss', 'vendorJs', 'vendorFont']);
 
-    grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-        grunt.task.run([
-            'default',
-            'connect:app',
-            'watch'
-        ]);
-    });
+    grunt.registerTask('serve', [
+        'default',
+        'express:app',
+        'watch'
+    ]);
+
 };

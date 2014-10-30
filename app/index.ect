@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/Person">
+<html lang="en" itemscope itemtype="http://schema.org/Person" ng-app="ruzzarin">
 <head>
     <meta charset="utf-8"/>
     <meta name="ROBOTS" content="INDEX, FOLLOW"/>
@@ -22,16 +22,25 @@
     <link rel="author" href="<%- @googlePlusUrl %>"/>
 
     <title><%= @title %></title>
+
+    <base href="/"/>
 </head>
-<body>
+<body ng-controller="appCtrl as app">
 <nav class="social navbar navbar-static-top">
     <div class="container">
         <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="https://www.linkedin.com/in/alexruzzarin/"><i class="fa fa-linkedin"></i></a>
+            <li class="active">
+                <a href="https://www.linkedin.com/in/alexruzzarin/"><i class="fa fa-linkedin"></i></a>
             </li>
-            <li class="active"><a href="https://www.facebook.com/alex.ruzzarin/"><i class="fa fa-facebook"></i></a></li>
-            <li class="active"><a href="https://twitter.com/alexruzzarin"><i class="fa fa-twitter"></i></a></li>
-            <li class="active"><a href="https://github.com/alexruzzarin/"><i class="fa fa-github"></i></a></li>
+            <li class="active">
+                <a href="https://www.facebook.com/alex.ruzzarin/"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li class="active">
+                <a href="https://twitter.com/alexruzzarin"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li class="active">
+                <a href="https://github.com/alexruzzarin/"><i class="fa fa-github"></i></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -50,41 +59,17 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <nav class="collapse navbar-collapse navbar-right" role="navigation">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#"><i class="fa fa-home">&nbsp;</i>Home</a></li>
+                    <li ng-class="{ active: app.isActive('/')}"><a href="/"><i class="fa fa-home">&nbsp;</i>Home</a></li>
                     <li><a href="#"><i class="fa fa-briefcase">&nbsp;</i>Resume</a></li>
                     <li><a href="#"><i class="fa fa-rss">&nbsp;</i>Blog</a></li>
-                    <li><a href="#"><i class="fa fa-envelope">&nbsp;</i>Contact</a></li>
+                    <li ng-class="{ active: app.isActive('/contact')}"><a href="/contact"><i class="fa fa-envelope">
+                        &nbsp;</i>Contact</a></li>
                 </ul>
             </nav>
         </div>
     </div>
 </header>
-<div class="container banner">
-
-</div>
-<div class="container">
-    <section>
-        <article>
-        </article>
-        <article>
-            <h1>Alex Ruzzarin</h1>
-
-            <h2>Software Developer</h2>
-
-            <p>Programmer with degree in Analysis and Development of Information Systems from FTEC of Caxias do Sul -
-                Brazil. Today lives in Argentina.<br/>
-                For years developing solutions for large enterprises.<br/>
-                Professional and trainer certified by Microsoft (Microsoft Certified Professional Developer Web
-                Developer 4 and Windows Azure).<br/>
-                Crazy for technology, works with. Net by choice because it is also a fan of other platforms such as Ruby
-                and JavaScript (and Node.js!).<br/>
-                Active participant in the community, loves go to Coding Dojos and conferences, and is part of many
-                discussion groups.</p>
-            <a href="/contact" class="btn btn-default"><i class="fa fa-briefcase">&nbsp;</i>View my resume</a>
-            <a href="/contact" class="btn btn-default"><i class="fa fa-envelope">&nbsp;</i>Contact me now</a>
-        </article>
-    </section>
-</div>
+<ng-view></ng-view>
 
 <script src="/js/fallback.min.js"></script>
 
@@ -98,7 +83,14 @@
         'bootstrap-theme': ['//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css', '/css/bootstrap-theme.min.css'],
         'font-awesome': ['//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', '/css/font-awesome.min.css'],
         'app': ['/css/app.css'],
-        'Validator': ['/js/app.js']
+        'angular': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js', '/js/angular.min.js'],
+        'angular.module("ngRoute")': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js', '/js/angular-route.min.js'],
+        'angular.module("ruzzarin")': ['/js/app.js']
+    }, {
+        shim: {
+            'angular.module("ngRoute")': ['angular'],
+            'angular.module("ruzzarin")': ['angular.module("ngRoute")']
+        }
     })
 </script>
 </body>
