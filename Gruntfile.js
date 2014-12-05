@@ -133,7 +133,6 @@ module.exports = function (grunt) {
             },
             vendorJs: {
                 files: [
-                    {src: 'bower_components/fallback/fallback.min.js', dest: 'public/js/fallback.min.js'},
                     {src: 'bower_components/angular/angular.min.js', dest: 'public/js/angular.min.js'},
                     {
                         src: 'bower_components/angular-route/angular-route.min.js',
