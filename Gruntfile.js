@@ -122,6 +122,10 @@ module.exports = function (grunt) {
                         dest: 'public/css/bootstrap.min.css'
                     },
                     {
+                        src: 'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+                        dest: 'public/css/bootstrap-theme.min.css'
+                    },
+                    {
                         src: 'bower_components/Font-Awesome/css/font-awesome.min.css',
                         dest: 'public/css/font-awesome.min.css'
                     }

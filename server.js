@@ -1,5 +1,6 @@
 var api_user = process.env.sgUser || '',
-    api_key = process.env.sgKey || '';
+    api_key = process.env.sgKey || '',
+    prerenderToken = process.env.prerenderToken || '';
 
 require('newrelic');
 
@@ -13,6 +14,8 @@ var app = express();
 app.use(compression());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(require('prerender-node').set('prerenderToken', prerenderToken));
 
 app.use('/js', express.static(__dirname + '/public/js'));
 app.use('/css', express.static(__dirname + '/public/css'));
