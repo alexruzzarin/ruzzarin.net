@@ -30,11 +30,13 @@
     "grunt-ect": "^0.1.2",
     "grunt-express-server": "^0.4.19",
     "grunt-htmlhint": "^0.4.1",
+    "grunt-ng-annotate": "^0.8.0",
     "matchdep": "^0.3.0"
   },
   "dependencies": {
     "body-parser": "^1.9.3",
     "compression": "^1.2.1",
+    "ect": "^0.5.9",
     "express": "^4.10.4",
     "newrelic": "^1.14.0",
     "prerender-node": "^1.1.1",

@@ -20,10 +20,6 @@ module.exports = function (grunt) {
                 },
                 files: [
                     {
-                        src: ['app/index.ect'],
-                        dest: 'public/index.html'
-                    },
-                    {
                         expand: true,
                         cwd: 'app/partials',
                         src: '**/*.ect',
@@ -55,9 +51,15 @@ module.exports = function (grunt) {
                     removeComments: true,
                     collapseWhitespace: true
                 },
-                files: {
-                    'public/index.html': 'public/index.html'
-                }
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'public/partials',
+                        src: '**/*.html',
+                        dest: 'public/partials',
+                        ext: '.html'
+                    }
+                ]
             }
         },
         jshint: {
@@ -69,6 +71,13 @@ module.exports = function (grunt) {
             appJs: {
                 src: ['app/script/module.js', 'app/script/**/*.js'],
                 dest: 'public/js/app.js'
+            }
+        },
+        ngAnnotate: {
+            appJs: {
+                files: {
+                    'public/js/app.js': ['public/js/app.js']
+                }
             }
         },
         uglify: {
@@ -145,12 +154,13 @@ module.exports = function (grunt) {
                     {expand: true, src: ['app/images/**/*.*'], dest: 'public/images/', flatten: true, filter: 'isFile'}
                 ]
             },
-            newRelic: {
+            appStatic: {
                 files: [
-                    {src: 'node_modules/newrelic/lib/config.default.js', dest: 'newrelic.js'}
+                    {src: 'app/favicon.ico', dest: 'public/favicon.ico'},
+                    {src: 'app/robots.txt', dest: 'public/robots.txt'},
+                    {src: 'app/sitemap.xml', dest: 'public/sitemap.xml'}
                 ]
             }
-
         },
         clean: {
             options: {
@@ -216,19 +226,21 @@ module.exports = function (grunt) {
     grunt.registerTask('appCss', ['less:appCss']);
     grunt.registerTask('appJs', ['jshint:appJs', 'concat:appJs']);
     grunt.registerTask('appImages', ['copy:appImages']);
+    grunt.registerTask('appStatic', ['copy:appStatic']);
 
     grunt.registerTask('releaseAppHtml', ['appHtml', 'htmlmin:appHtml']);
     grunt.registerTask('releaseAppCss', ['appCss', 'cssc:appCss', 'cssmin:appCss']);
-    grunt.registerTask('releaseAppJs', ['appJs', 'uglify:appJs']);
+    grunt.registerTask('releaseAppJs', ['appJs', 'ngAnnotate:appJs', 'uglify:appJs']);
     grunt.registerTask('releaseAppImages', ['appImages']);
+    grunt.registerTask('releaseAppStatic', ['appStatic']);
 
     grunt.registerTask('vendorCss', ['copy:vendorCss']);
     grunt.registerTask('vendorJs', ['copy:vendorJs']);
-    grunt.registerTask('vendorFont', ['copy:vendorFonts']);
+    grunt.registerTask('vendorFonts', ['copy:vendorFonts']);
 
-    grunt.registerTask('default', ['clean', 'appHtml', 'appCss', 'appJs', 'appImages', 'vendorCss', 'vendorJs', 'vendorFont']);
+    grunt.registerTask('default', ['clean', 'appHtml', 'appCss', 'appJs', 'appImages', 'appStatic', 'vendorCss', 'vendorJs', 'vendorFonts']);
 
-    grunt.registerTask('release', ['clean', 'releaseAppHtml', 'releaseAppCss', 'releaseAppJs', 'releaseAppImages', 'vendorCss', 'vendorJs', 'vendorFont']);
+    grunt.registerTask('release', ['clean', 'releaseAppHtml', 'releaseAppCss', 'releaseAppJs', 'releaseAppImages', 'releaseAppStatic', 'vendorCss', 'vendorJs', 'vendorFonts']);
 
     grunt.registerTask('serve', [
         'default',

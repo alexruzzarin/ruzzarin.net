@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="fragment" content="!"/>
 
     <meta name="description" content="<%- @description %>"/>
     <meta name="keywords" content="<%- @keywords %>"/>
@@ -13,10 +14,10 @@
 
     <meta itemprop="name" content="<%- @name %>"/>
     <meta itemprop="description" content="<%- @description %>"/>
-    <!--<meta itemprop="image" content="<%- @image %>" />-->
+    <meta itemprop="image" content="<%- @image %>" />
 
     <meta property="og:title" content="<%- @title %>"/>
-    <!--<meta property="og:image" content="<%- @image %>" />-->
+    <meta property="og:image" content="<%- @image %>" />
     <meta property="og:description" content="<%- @description %>"/>
 
     <link rel="author" href="<%- @googlePlusUrl %>"/>
@@ -26,17 +27,17 @@
     <base href="/"/>
 
 
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700&.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700&.css"/>
     <% if @env != 'production' : %>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
     <% else : %>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
     <% end %>
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/app.css"/>
 </head>
 <body ng-controller="appCtrl as app">
 <nav class="social navbar navbar-static-top">
