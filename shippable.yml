@@ -16,7 +16,7 @@ before_install:
 #install the required dependencies
 install:
   - npm install
-  - bower install
+  - bower install --allow-root
 
 script:
   - grunt release
