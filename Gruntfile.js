@@ -89,8 +89,15 @@ module.exports = function (grunt) {
         },
         less: {
             appCss: {
-                src: ['app/style/**/*.less'],
-                dest: 'public/css/app.css'
+                files:[
+                    {
+                        expand: true,
+                        cwd: 'app/style',
+                        src: '*.less',
+                        dest: 'public/css',
+                        ext: '.css'
+                    }
+                ]
             }
         },
         cssmin: {
