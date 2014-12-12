@@ -35,8 +35,7 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
 
   IF NOT DEFINED PREVIOUS_MANIFEST_PATH (
     SET PREVIOUS_MANIFEST_PATH=%ARTIFACTS%\manifest
-  )
-)
+  ))
 
 IF NOT DEFINED KUDU_SYNC_CMD (
   :: Install kudu sync
@@ -120,7 +119,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\bower.json" (
 IF EXIST "%DEPLOYMENT_TARGET%\Gruntfile.js" (
   pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd !NPM_CMD! install grunt-cli
-  call :ExecuteCmd ./node_modules/.bin/grunt release --no-color default
+  call :ExecuteCmd ./node_modules/.bin/grunt --no-color release
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )

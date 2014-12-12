@@ -93,18 +93,6 @@ module.exports = function (grunt) {
                 dest: 'public/css/app.css'
             }
         },
-        cssc: {
-            appCss: {
-                options: {
-                    consolidateViaDeclarations: true,
-                    consolidateViaSelectors: true,
-                    consolidateMediaQueries: true
-                },
-                files: {
-                    'public/css/app.css': 'public/css/app.css'
-                }
-            }
-        },
         cssmin: {
             appCss: {
                 src: 'public/css/app.css',
@@ -229,7 +217,7 @@ module.exports = function (grunt) {
     grunt.registerTask('appStatic', ['copy:appStatic']);
 
     grunt.registerTask('releaseAppHtml', ['appHtml', 'htmlmin:appHtml']);
-    grunt.registerTask('releaseAppCss', ['appCss', 'cssc:appCss', 'cssmin:appCss']);
+    grunt.registerTask('releaseAppCss', ['appCss', 'cssmin:appCss']);
     grunt.registerTask('releaseAppJs', ['appJs', 'ngAnnotate:appJs', 'uglify:appJs']);
     grunt.registerTask('releaseAppImages', ['appImages']);
     grunt.registerTask('releaseAppStatic', ['appStatic']);
