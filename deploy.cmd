@@ -100,6 +100,10 @@ call :SelectNodeVersion
 
 :: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
+
+  echo "package.json:"
+  more "%DEPLOYMENT_TARGET%\package.json"
+
   pushd "%DEPLOYMENT_TARGET%
   echo :ExecuteCmd !NPM_CMD! cache clean
   call :ExecuteCmd !NPM_CMD! cache clean
