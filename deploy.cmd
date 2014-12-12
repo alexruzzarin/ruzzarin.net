@@ -109,6 +109,13 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   call :ExecuteCmd !NPM_CMD! cache clean
   echo :ExecuteCmd !NPM_CMD! install
   call :ExecuteCmd !NPM_CMD! install
+
+  echo :ExecuteCmd !NPM_CMD! install grunt-express-server
+  call :ExecuteCmd !NPM_CMD! install grunt-express-server
+
+  echo :ExecuteCmd !NPM_CMD! install grunt-ng-annotate
+  call :ExecuteCmd !NPM_CMD! install grunt-ng-annotate
+
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
