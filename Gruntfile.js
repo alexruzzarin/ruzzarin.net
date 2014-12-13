@@ -89,7 +89,7 @@ module.exports = function (grunt) {
         },
         less: {
             appCss: {
-                files:[
+                files: [
                     {
                         expand: true,
                         cwd: 'app/style',
@@ -142,6 +142,17 @@ module.exports = function (grunt) {
                         src: 'bower_components/angular-route/angular-route.min.js',
                         dest: 'public/js/angular-route.min.js'
                     },
+                ]
+            },
+            appFonts: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['app/fonts/**'],
+                        dest: 'public/fonts/',
+                        flatten: true,
+                        filter: 'isFile'
+                    }
                 ]
             },
             appImages: {
@@ -222,6 +233,7 @@ module.exports = function (grunt) {
     grunt.registerTask('appJs', ['jshint:appJs', 'concat:appJs']);
     grunt.registerTask('appImages', ['copy:appImages']);
     grunt.registerTask('appStatic', ['copy:appStatic']);
+    grunt.registerTask('appFonts', ['copy:appFonts']);
 
     grunt.registerTask('releaseAppHtml', ['appHtml', 'htmlmin:appHtml']);
     grunt.registerTask('releaseAppCss', ['appCss', 'cssmin:appCss']);
@@ -233,7 +245,7 @@ module.exports = function (grunt) {
     grunt.registerTask('vendorJs', ['copy:vendorJs']);
     grunt.registerTask('vendorFonts', ['copy:vendorFonts']);
 
-    grunt.registerTask('default', ['clean', 'appHtml', 'appCss', 'appJs', 'appImages', 'appStatic', 'vendorCss', 'vendorJs', 'vendorFonts']);
+    grunt.registerTask('default', ['clean', 'appHtml', 'appCss', 'appJs', 'appImages', 'appStatic', 'appFonts', 'vendorCss', 'vendorJs', 'vendorFonts']);
 
     grunt.registerTask('release', ['clean', 'releaseAppHtml', 'releaseAppCss', 'releaseAppJs', 'releaseAppImages', 'releaseAppStatic', 'vendorCss', 'vendorJs', 'vendorFonts']);
 
