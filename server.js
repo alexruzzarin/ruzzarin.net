@@ -1,6 +1,7 @@
 var api_user = process.env.sgUser || '',
     api_key = process.env.sgKey || '',
-    prerenderToken = process.env.prerenderToken || '';
+    prerenderToken = process.env.prerenderToken || '',
+    cdnUrl = process.env.cdnUrl || false; //cdn.ruzzarin.net
 
 require('newrelic');
 
@@ -57,10 +58,11 @@ app.use('/api', apiRouter);
 app.get('/*', function (req, res) {
     var model = {
         env: process.env.NODE_ENV,
+        cdnUrl: cdnUrl,
         name: "Alex Ruzzarin",
         title: "Alex Ruzzarin - Software Developer",
         description: "Programmer with degree in Analysis and Development of Information Systems. Professional and trainer certified by Microsoft. Crazy for technology, works with. Net, but is a fan of Ruby and JavaScript (and Node.Js).",
-        image: "http://www.ruzzarin.net/images/Alex-Ruzzarin.jpg",
+        image: (cdnUrl ? cdnUrl : "http://www.ruzzarin.net") + "/images/Alex-Ruzzarin.jpg",
         keywords: "HTML,CSS,JavaScript,.net,dotnet,node,nodejs,node.js,asp.net,aspnet",
         googlePlusUrl: "https://plus.google.com/+AlexRuzzarin/posts"
     };

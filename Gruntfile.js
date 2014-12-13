@@ -70,20 +70,20 @@ module.exports = function (grunt) {
         concat: {
             appJs: {
                 src: ['app/script/module.js', 'app/script/**/*.js'],
-                dest: 'public/js/app.js'
+                dest: 'public/jss/app.js'
             }
         },
         ngAnnotate: {
             appJs: {
                 files: {
-                    'public/js/app.js': ['public/js/app.js']
+                    'public/jss/app.js': ['public/jss/app.js']
                 }
             }
         },
         uglify: {
             appJs: {
                 files: {
-                    'public/js/app.js': ['public/js/app.js']
+                    'public/jss/app.js': ['public/jss/app.js']
                 }
             }
         },
@@ -137,10 +137,10 @@ module.exports = function (grunt) {
             },
             vendorJs: {
                 files: [
-                    {src: 'bower_components/angular/angular.min.js', dest: 'public/js/angular.min.js'},
+                    {src: 'bower_components/angular/angular.min.js', dest: 'public/jss/angular.min.js'},
                     {
                         src: 'bower_components/angular-route/angular-route.min.js',
-                        dest: 'public/js/angular-route.min.js'
+                        dest: 'public/jss/angular-route.min.js'
                     },
                 ]
             },
@@ -240,6 +240,7 @@ module.exports = function (grunt) {
     grunt.registerTask('releaseAppJs', ['appJs', 'ngAnnotate:appJs', 'uglify:appJs']);
     grunt.registerTask('releaseAppImages', ['appImages']);
     grunt.registerTask('releaseAppStatic', ['appStatic']);
+    grunt.registerTask('releaseAppFonts', ['appFonts']);
 
     grunt.registerTask('vendorCss', ['copy:vendorCss']);
     grunt.registerTask('vendorJs', ['copy:vendorJs']);
@@ -247,7 +248,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['clean', 'appHtml', 'appCss', 'appJs', 'appImages', 'appStatic', 'appFonts', 'vendorCss', 'vendorJs', 'vendorFonts']);
 
-    grunt.registerTask('release', ['clean', 'releaseAppHtml', 'releaseAppCss', 'releaseAppJs', 'releaseAppImages', 'releaseAppStatic', 'vendorCss', 'vendorJs', 'vendorFonts']);
+    grunt.registerTask('release', ['clean', 'releaseAppHtml', 'releaseAppCss', 'releaseAppJs', 'releaseAppImages', 'releaseAppStatic', 'releaseAppFonts', 'vendorCss', 'vendorJs', 'vendorFonts']);
 
     grunt.registerTask('serve', [
         'default',
