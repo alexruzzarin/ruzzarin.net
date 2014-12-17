@@ -179,65 +179,33 @@ module.exports = function (grunt) {
         'azure-cdn-deploy': {
             appJs: {
                 options: {
-                    containerName: 'jss', // container name in blob
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
-                    folder: '', // path within container
-                    zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
-                    deleteExistingBlobs: true, // true means recursively deleting anything under folder
-                    concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
-                    metadata: {
-                        cacheControl: 'public, max-age=31530000', // cache in browser
-                        cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
-                    },
-                    testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+                    containerName: 'jss',
+                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
+                    zip: true
                 },
                 src: ['/public/jss/app.js']
             },
             appCss: {
                 options: {
-                    containerName: 'css', // container name in blob
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
-                    folder: '', // path within container
-                    zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
-                    deleteExistingBlobs: true, // true means recursively deleting anything under folder
-                    concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
-                    metadata: {
-                        cacheControl: 'public, max-age=31530000', // cache in browser
-                        cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
-                    },
-                    testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+                    containerName: 'css',
+                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
+                    zip: true
                 },
                 src: ['/public/css/app.css']
             },
             appFonts: {
                 options: {
-                    containerName: 'fonts', // container name in blob
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
-                    folder: '', // path within container
-                    zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
-                    deleteExistingBlobs: true, // true means recursively deleting anything under folder
-                    concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
-                    metadata: {
-                        cacheControl: 'public, max-age=31530000', // cache in browser
-                        cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
-                    },
-                    testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+                    containerName: 'fonts',
+                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
+                    zip: true
                 },
                 src: ['/public/fonts/ruzzarin.*']
             },
             appImages: {
                 options: {
-                    containerName: 'images', // container name in blob
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
-                    folder: '', // path within container
-                    zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
-                    deleteExistingBlobs: true, // true means recursively deleting anything under folder
-                    concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
-                    metadata: {
-                        cacheControl: 'public, max-age=31530000', // cache in browser
-                        cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
-                    },
-                    testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+                    containerName: 'images',
+                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
+                    zip: true
                 },
                 src: ['/public/images/**/*.*']
             }
