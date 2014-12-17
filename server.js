@@ -17,6 +17,17 @@ var ectRenderer = ECT({watch: true, root: __dirname + '/views', ext: '.ect'});
 app.set('view engine', 'ect');
 app.engine('ect', ectRenderer.render);
 
+app.use(function (req, res, next) {
+    if (req.hostname == 'localhost') {
+        next();
+    }
+    if (req.hostname != 'www.ruzzarin.net') {
+        var redirectTo = req.protocol + '://www.ruzzarin.net' + req.originalUrl;
+        res.redirect(301, redirectTo);
+    }
+    next();
+});
+
 app.use(compression());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
