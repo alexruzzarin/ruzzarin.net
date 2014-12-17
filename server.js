@@ -20,10 +20,12 @@ app.engine('ect', ectRenderer.render);
 app.use(function (req, res, next) {
     if (req.hostname == 'localhost') {
         next();
+        return;
     }
     if (req.hostname != 'www.ruzzarin.net') {
         var redirectTo = req.protocol + '://www.ruzzarin.net' + req.originalUrl;
         res.redirect(301, redirectTo);
+        return;
     }
     next();
 });
