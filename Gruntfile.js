@@ -195,7 +195,7 @@ module.exports = function (grunt) {
             },
             appCss: {
                 options: {
-                    containerName: 'jss', // container name in blob
+                    containerName: 'css', // container name in blob
                     serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
                     folder: '', // path within container
                     zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
@@ -211,7 +211,7 @@ module.exports = function (grunt) {
             },
             appFonts: {
                 options: {
-                    containerName: 'jss', // container name in blob
+                    containerName: 'fonts', // container name in blob
                     serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
                     folder: '', // path within container
                     zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
@@ -227,7 +227,7 @@ module.exports = function (grunt) {
             },
             appImages: {
                 options: {
-                    containerName: 'jss', // container name in blob
+                    containerName: 'images', // container name in blob
                     serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME], // custom arguments to azure.createBlobService
                     folder: '', // path within container
                     zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
