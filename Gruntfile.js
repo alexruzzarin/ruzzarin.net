@@ -176,40 +176,6 @@ module.exports = function (grunt) {
                 src: ["public/**"]
             }
         },
-        'azure-cdn-deploy': {
-            appJs: {
-                options: {
-                    containerName: 'jss',
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
-                    zip: true
-                },
-                src: ['/public/jss/app.js']
-            },
-            appCss: {
-                options: {
-                    containerName: 'css',
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
-                    zip: true
-                },
-                src: ['/public/css/app.css']
-            },
-            appFonts: {
-                options: {
-                    containerName: 'fonts',
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
-                    zip: true
-                },
-                src: ['/public/fonts/ruzzarin.*']
-            },
-            appImages: {
-                options: {
-                    containerName: 'images',
-                    serviceOptions: [process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_NAME, process.env.AZURE_BLOB_HOST],
-                    zip: true
-                },
-                src: ['/public/images/**/*.*']
-            }
-        },
         'azureblob': {
             options: {
                 containerDelete: false,
@@ -223,7 +189,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '/public/jss',
+                    cwd: 'public/jss',
                     filter: 'isFile',
                     dest: '/',
                     src: ['app.js' ]
@@ -235,7 +201,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '/public/css',
+                    cwd: 'public/css',
                     filter: 'isFile',
                     dest: '/',
                     src: ['app.css' ]
@@ -247,7 +213,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '/public/fonts',
+                    cwd: 'public/fonts',
                     filter: 'isFile',
                     dest: '/',
                     src: ['ruzzarin.*' ]
@@ -259,7 +225,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '/public/images',
+                    cwd: 'public/images',
                     filter: 'isFile',
                     dest: '/',
                     src: ['**/*.*' ]
