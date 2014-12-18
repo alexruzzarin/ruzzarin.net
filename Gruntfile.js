@@ -210,6 +210,62 @@ module.exports = function (grunt) {
                 src: ['/public/images/**/*.*']
             }
         },
+        'azureblob': {
+            options: {
+                containerDelete: false,
+                metadata: {cacheControl: 'public, max-age=31556926'}, // max-age 1 year for all entries
+                gzip: true,
+                copySimulation: true  // set true: dry-run for what copy would look like in output
+            },
+            appJs :{
+                options:{
+                    containerName:'jss'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '/public/jss',
+                    filter: 'isFile',
+                    dest: '/',
+                    src: ['app.js' ]
+                }]
+            },
+            appCss :{
+                options:{
+                    containerName:'css'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '/public/css',
+                    filter: 'isFile',
+                    dest: '/',
+                    src: ['app.css' ]
+                }]
+            },
+            appFonts :{
+                options:{
+                    containerName:'fonts'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '/public/fonts',
+                    filter: 'isFile',
+                    dest: '/',
+                    src: ['ruzzarin.*' ]
+                }]
+            },
+            appImages :{
+                options:{
+                    containerName:'images'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '/public/images',
+                    filter: 'isFile',
+                    dest: '/',
+                    src: ['**/*.*' ]
+                }]
+            }
+        },
         watch: {
             options: {
                 livereload: true
