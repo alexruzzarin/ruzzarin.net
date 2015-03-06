@@ -14,6 +14,8 @@ var ECT = require('ect');
 var app = express();
 var ectRenderer = ECT({watch: true, root: __dirname + '/views', ext: '.ect'});
 
+app.disable('x-powered-by');
+
 app.set('view engine', 'ect');
 app.engine('ect', ectRenderer.render);
 
