@@ -38,6 +38,7 @@ app.use('/', express.static(__dirname + '/public/'));
 
 app.use(function(req, res, next) {
     res.header('X-Frame-Options', 'DENY');
+	res.header('Arr-Disable-Session-Affinity', 'True');
     next();
 });
 
