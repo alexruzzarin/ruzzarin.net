@@ -36,6 +36,11 @@ app.use(require('prerender-node').set('prerenderToken', prerenderToken));
 
 app.use('/', express.static(__dirname + '/public/'));
 
+app.use(function(req, res, next) {
+    res.header('X-Frame-Options', 'DENY');
+    next();
+});
+
 var apiRouter = express.Router();
 apiRouter.get('/', function (req, res) {
     res.json({message: 'hooray! welcome to our api!'});
