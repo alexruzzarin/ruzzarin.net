@@ -18,7 +18,7 @@
     "node": "0.10.x",
     "npm": "2.x"
   },
-  "devDependencies": {
+  "zzzDependencies": {
     "grunt": "^0.4.5",
     "grunt-azureblob": "^0.1.2",
     "grunt-contrib-clean": "^0.6.0",
