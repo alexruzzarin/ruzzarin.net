@@ -18,7 +18,7 @@
     "node": "0.10.x",
     "npm": "2.x"
   },
-  "zzzDependencies": {
+  "zzzdevDependencies": {
     "grunt": "^0.4.5",
     "grunt-azureblob": "^0.1.2",
     "grunt-contrib-clean": "^0.6.0",
@@ -44,5 +44,12 @@
     "newrelic": "^1.17.1",
     "prerender-node": "^1.2.1",
     "sendgrid": "^1.6.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-less": "^3.0.1",
+    "gulp-load-plugins": "^0.8.1",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-sourcemaps": "^1.5.0"
   }
 }
