@@ -44,6 +44,9 @@
     "compression": "^1.4.3",
     "ect": "^0.5.9",
     "express": "^4.12.3",
+    "glob": "^5.0.3",
+    "helmet": "^0.7.0",
+    "lodash": "^3.5.0",
     "newrelic": "^1.17.3",
     "prerender-node": "^1.2.1",
     "sendgrid": "^1.6.0"

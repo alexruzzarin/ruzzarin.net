@@ -1,6 +1,11 @@
 /**
  * Created by Alex on 3/11/2015.
  */
+'use strict';
+
+require('./config/init')();
+
+var config = require('./config/config');
 var gulp = require('gulp');
 var merge = require('merge-stream');
 var gulpLoadPlugins = require('gulp-load-plugins');
@@ -95,14 +100,14 @@ gulp.task('release', ['default'], function () {
         cwd: 'public/css'
     }).pipe(plugins.deployAzureCdn({
         containerName: 'css', // container name in blob
-        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        serviceOptions: [config.azureCdn.account, config.azureCdn.accessKey], // custom arguments to azure.createBlobService
         folder: '', // path within container
         zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
         deleteExistingBlobs: true, // true means recursively deleting anything under folder
         concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
         metadata: {
-            cacheControl: 'public, max-age=31530000', // cache in browser
-            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+            cacheControl: config.azureCdn.cacheControl, // cache in browser
+            cacheControlHeader: config.azureCdn.cacheControlHeader // cache in azure CDN. As this data does not change, we set it to 1 year
         },
         testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
     }));
@@ -110,14 +115,14 @@ gulp.task('release', ['default'], function () {
         cwd: 'public/jss'
     }).pipe(plugins.deployAzureCdn({
         containerName: 'jss', // container name in blob
-        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        serviceOptions: [config.azureCdn.account, config.azureCdn.accessKey], // custom arguments to azure.createBlobService
         folder: '', // path within container
         zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
         deleteExistingBlobs: true, // true means recursively deleting anything under folder
         concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
         metadata: {
-            cacheControl: 'public, max-age=31530000', // cache in browser
-            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+            cacheControl: config.azureCdn.cacheControl, // cache in browser
+            cacheControlHeader: config.azureCdn.cacheControlHeader // cache in azure CDN. As this data does not change, we set it to 1 year
         },
         testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
     }));
@@ -125,14 +130,14 @@ gulp.task('release', ['default'], function () {
         cwd: 'public/fonts'
     }).pipe(plugins.deployAzureCdn({
         containerName: 'fonts', // container name in blob
-        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        serviceOptions: [config.azureCdn.account, config.azureCdn.accessKey], // custom arguments to azure.createBlobService
         folder: '', // path within container
         zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
         deleteExistingBlobs: true, // true means recursively deleting anything under folder
         concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
         metadata: {
-            cacheControl: 'public, max-age=31530000', // cache in browser
-            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+            cacheControl: config.azureCdn.cacheControl, // cache in browser
+            cacheControlHeader: config.azureCdn.cacheControlHeader // cache in azure CDN. As this data does not change, we set it to 1 year
         },
         testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
     }));
@@ -140,14 +145,14 @@ gulp.task('release', ['default'], function () {
         cwd: 'public/images'
     }).pipe(plugins.deployAzureCdn({
         containerName: 'images', // container name in blob
-        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        serviceOptions: [config.azureCdn.account, config.azureCdn.accessKey], // custom arguments to azure.createBlobService
         folder: '', // path within container
         zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
         deleteExistingBlobs: true, // true means recursively deleting anything under folder
         concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
         metadata: {
-            cacheControl: 'public, max-age=31530000', // cache in browser
-            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+            cacheControl: config.azureCdn.cacheControl, // cache in browser
+            cacheControlHeader: config.azureCdn.cacheControlHeader // cache in azure CDN. As this data does not change, we set it to 1 year
         },
         testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
     }));

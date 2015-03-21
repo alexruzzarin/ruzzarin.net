@@ -1,24 +1,11 @@
-var api_user = process.env.sgUser || '',
-    api_key = process.env.sgKey || '',
-    prerenderToken = process.env.prerenderToken || '',
-    cdnUrl = process.env.cdnUrl || false, //cdn.ruzzarin.net,
-    minified = process.env.NODE_ENV === 'production' ? '.min' : '';
+'use strict';
+
+require('./config/init')();
+var config = require('./config/config');
 
 require('newrelic');
 
-var express = require('express');
-var compression = require('compression');
-var bodyParser = require('body-parser');
-var sendgrid = require('sendgrid')(api_user, api_key);
-var ECT = require('ect');
-
-var app = express();
-var ectRenderer = ECT({watch: true, root: __dirname + '/views', ext: '.ect'});
-
-app.disable('x-powered-by');
-
-app.set('view engine', 'ect');
-app.engine('ect', ectRenderer.render);
+var app = require('./config/express')();
 
 app.use(function (req, res, next) {
     if (req.hostname != 'localhost' && req.hostname != 'www.ruzzarin.net') {
@@ -28,14 +15,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(compression());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
-app.use(require('prerender-node').set('prerenderToken', prerenderToken));
-
-
-app.use('/', express.static(__dirname + '/public/'));
+app.use(require('prerender-node').set('prerenderToken', config.prerender.token));
 
 app.use(function (req, res, next) {
     res.header('X-Frame-Options', 'DENY');
@@ -43,54 +23,17 @@ app.use(function (req, res, next) {
     next();
 });
 
-var apiRouter = express.Router();
-apiRouter.get('/', function (req, res) {
-    res.json({message: 'hooray! welcome to our api!'});
-});
-apiRouter.route('/contact')
-    .post(function (req, res) {
-        var email = new sendgrid.Email({
-            to: 'alex@ruzzarin.net',
-            from: 'contact@ruzzarin.net',
-            fromname: req.body.name,
-            replyto: req.body.email,
-            subject: req.body.subject,
-            text: req.body.message
-        });
-
-        console.log('Form: ' + req.body.name);
-
-        sendgrid.send(email, function (err, json) {
-            if (err) {
-                console.error(err);
-            }
-            console.log(json);
-
-            res.json({success: true});
-        });
-    });
-
-app.use('/api', apiRouter);
-
-app.get('/*', function (req, res) {
-    var model = {
-        env: process.env.NODE_ENV,
-        cdnUrl: cdnUrl,
-        minified: minified,
-        name: "Alex Ruzzarin",
-        title: "Alex Ruzzarin - Software Developer",
-        description: "Programmer with degree in Analysis and Development of Information Systems. Professional and trainer certified by Microsoft. Crazy for technology, works with. Net, but is a fan of Ruby and JavaScript (and Node.Js).",
-        image: (cdnUrl ? cdnUrl : "http://www.ruzzarin.net") + "/images/Alex-Ruzzarin.jpg",
-        keywords: "HTML,CSS,JavaScript,.net,dotnet,node,nodejs,node.js,asp.net,aspnet",
-        googlePlusUrl: "https://plus.google.com/+AlexRuzzarin/posts"
-    };
-    res.render('index', model);
-});
-
-var server = app.listen(process.env.PORT || 3000, function () {
+var server = app.listen(config.port, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('Express server listening at http://%s:%s', host, port);
 });
 
-module.exports = exports = server;
+exports = module.exports = app;
+
+// Logging initialization
+console.log('--');
+console.log(config.app.title + ' application started');
+console.log('Environment:\t\t\t' + process.env.NODE_ENV);
+console.log('Port:\t\t\t\t' + config.port);
+console.log('--');
