@@ -2,6 +2,7 @@
  * Created by Alex on 3/11/2015.
  */
 var gulp = require('gulp');
+var merge = require('merge-stream');
 var gulpLoadPlugins = require('gulp-load-plugins');
 var plugins = gulpLoadPlugins();
 
@@ -90,4 +91,65 @@ gulp.task('serve', ['watch'], function () {
 });
 
 gulp.task('release', ['default'], function () {
+    var css = gulp.src('*.css', {
+        cwd: 'public/css'
+    }).pipe(plugins.deployAzureCdn({
+        containerName: 'css', // container name in blob
+        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        folder: '', // path within container
+        zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
+        deleteExistingBlobs: true, // true means recursively deleting anything under folder
+        concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
+        metadata: {
+            cacheControl: 'public, max-age=31530000', // cache in browser
+            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+        },
+        testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+    }));
+    var jss = gulp.src('*.js', {
+        cwd: 'public/jss'
+    }).pipe(plugins.deployAzureCdn({
+        containerName: 'jss', // container name in blob
+        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        folder: '', // path within container
+        zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
+        deleteExistingBlobs: true, // true means recursively deleting anything under folder
+        concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
+        metadata: {
+            cacheControl: 'public, max-age=31530000', // cache in browser
+            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+        },
+        testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+    }));
+    var fonts = gulp.src('*.*', {
+        cwd: 'public/fonts'
+    }).pipe(plugins.deployAzureCdn({
+        containerName: 'fonts', // container name in blob
+        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        folder: '', // path within container
+        zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
+        deleteExistingBlobs: true, // true means recursively deleting anything under folder
+        concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
+        metadata: {
+            cacheControl: 'public, max-age=31530000', // cache in browser
+            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+        },
+        testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+    }));
+    var images = gulp.src('*.*', {
+        cwd: 'public/images'
+    }).pipe(plugins.deployAzureCdn({
+        containerName: 'images', // container name in blob
+        serviceOptions: ['ruzzarin', 'fail'], // custom arguments to azure.createBlobService
+        folder: '', // path within container
+        zip: true, // gzip files if they become smaller after zipping, content-encoding header will change if file is zipped
+        deleteExistingBlobs: true, // true means recursively deleting anything under folder
+        concurrentUploadThreads: 10, // number of concurrent uploads, choose best for your network condition
+        metadata: {
+            cacheControl: 'public, max-age=31530000', // cache in browser
+            cacheControlHeader: 'public, max-age=31530000' // cache in azure CDN. As this data does not change, we set it to 1 year
+        },
+        testRun: false // test run - means no blobs will be actually deleted or uploaded, see log messages for details
+    }));
+    return merge(css, jss, fonts, images);
 });
