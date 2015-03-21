@@ -1,7 +1,8 @@
 var api_user = process.env.sgUser || '',
     api_key = process.env.sgKey || '',
     prerenderToken = process.env.prerenderToken || '',
-    cdnUrl = process.env.cdnUrl || false; //cdn.ruzzarin.net
+    cdnUrl = process.env.cdnUrl || false, //cdn.ruzzarin.net,
+    minified = process.env.NODE_ENV === 'production' ? '.min' : '';
 
 require('newrelic');
 
@@ -36,9 +37,9 @@ app.use(require('prerender-node').set('prerenderToken', prerenderToken));
 
 app.use('/', express.static(__dirname + '/public/'));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header('X-Frame-Options', 'DENY');
-	res.header('Arr-Disable-Session-Affinity', 'True');
+    res.header('Arr-Disable-Session-Affinity', 'True');
     next();
 });
 
@@ -75,6 +76,7 @@ app.get('/*', function (req, res) {
     var model = {
         env: process.env.NODE_ENV,
         cdnUrl: cdnUrl,
+        minified: minified,
         name: "Alex Ruzzarin",
         title: "Alex Ruzzarin - Software Developer",
         description: "Programmer with degree in Analysis and Development of Information Systems. Professional and trainer certified by Microsoft. Crazy for technology, works with. Net, but is a fan of Ruby and JavaScript (and Node.Js).",
@@ -85,9 +87,10 @@ app.get('/*', function (req, res) {
     res.render('index', model);
 });
 
-
 var server = app.listen(process.env.PORT || 3000, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('Express server listening at http://%s:%s', host, port);
 });
+
+module.exports = exports = server;
