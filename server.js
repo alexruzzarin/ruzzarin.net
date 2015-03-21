@@ -7,22 +7,6 @@ require('newrelic');
 
 var app = require('./config/express')();
 
-app.use(function (req, res, next) {
-    if (req.hostname != 'localhost' && req.hostname != 'www.ruzzarin.net') {
-        var redirectTo = req.protocol + '://www.ruzzarin.net' + req.originalUrl;
-        res.redirect(301, redirectTo);
-    }
-    next();
-});
-
-app.use(require('prerender-node').set('prerenderToken', config.prerender.token));
-
-app.use(function (req, res, next) {
-    res.header('X-Frame-Options', 'DENY');
-    res.header('Arr-Disable-Session-Affinity', 'True');
-    next();
-});
-
 var server = app.listen(config.port, function () {
     var host = server.address().address;
     var port = server.address().port;

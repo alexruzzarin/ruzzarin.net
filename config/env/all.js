@@ -3,6 +3,7 @@
  */
 'use strict';
 module.exports = {
+    url: 'www.ruzzarin.net',
     port: process.env.PORT || 3000,
     cdnUrl: process.env.cdnUrl || false,
     minified: process.env.NODE_ENV === 'production' ? '.min' : '',

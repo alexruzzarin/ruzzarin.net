@@ -11,7 +11,7 @@ exports.get = function (req, res) {
         cdnUrl: config.cdnUrl,
         minified: config.minified,
         name: "Alex Ruzzarin",
-        image: (config.cdnUrl ? config.cdnUrl : "http://www.ruzzarin.net") + "/images/Alex-Ruzzarin.jpg",
+        image: (config.cdnUrl ? config.cdnUrl : "http://"+ config.url) + "/images/Alex-Ruzzarin.jpg",
         googlePlusUrl: "https://plus.google.com/+AlexRuzzarin/posts"
     };
     res.render('index', model);

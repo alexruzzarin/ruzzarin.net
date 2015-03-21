@@ -26,6 +26,15 @@ module.exports = function () {
     app.locals.description = config.app.description;
     app.locals.keywords = config.app.keywords;
 
+    // Force URL domain
+    app.use(function (req, res, next) {
+        if (req.hostname != 'localhost' && req.hostname != config.url) {
+            var redirectTo = req.protocol + '://' + config.url + req.originalUrl;
+            res.redirect(301, redirectTo);
+        }
+        next();
+    });
+
     // Passing the request url to environment locals
     app.use(function (req, res, next) {
         res.locals.url = req.protocol + '://' + req.headers.host + req.url;
@@ -71,6 +80,15 @@ module.exports = function () {
     app.use(helmet.nosniff());
     app.use(helmet.ienoopen());
     app.disable('x-powered-by');
+
+    app.use(function (req, res, next) {
+        //res.header('X-Frame-Options', 'DENY');
+        res.header('Arr-Disable-Session-Affinity', 'True');
+        next();
+    });
+
+    // Pre render pages to Bots
+    app.use(require('prerender-node').set('prerenderToken', config.prerender.token));
 
     // Setting the app router and static folder
     app.use(express.static(path.resolve('./public')));
