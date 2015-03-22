@@ -19,7 +19,7 @@
     "npm": "2.x"
   },
   "scripts": {
-    "postInstall": "bower i"
+    "start": "node server.js"
   },
   "zzzdevDependencies": {
     "grunt": "^0.4.5",
