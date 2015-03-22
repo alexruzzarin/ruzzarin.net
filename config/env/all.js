@@ -12,6 +12,17 @@ module.exports = {
         description: 'Programmer with degree in Analysis and Development of Information Systems. Professional and trainer certified by Microsoft. Crazy for technology, works with. Net, but is a fan of Ruby and JavaScript (and Node.Js).',
         keywords: 'HTML,CSS,JavaScript,.net,dotnet,node,nodejs,node.js,asp.net,aspnet'
     },
+    social: {
+        name: 'Alex Ruzzarin',
+        url: 'http://www.ruzzarin.net',
+        google: 'https://plus.google.com/+AlexRuzzarin',
+        youtube: 'https://www.youtube.com/channel/UCzSHLabsxKezSIpoc5bD7Zw',
+        facebook: 'https://www.facebook.com/alex.ruzzarin',
+        twitter: 'https://twitter.com/alexruzzarin',
+        instagram: 'https://instagram.com/alexruzzarin',
+        linkedin: 'https://www.linkedin.com/in/alexruzzarin',
+        github: 'https://github.com/alexruzzarin'
+    },
     azureCdn: {
         account: process.env.AZURE_STORAGE_ACCOUNT,
         accessKey: process.env.AZURE_STORAGE_ACCESS_KEY,

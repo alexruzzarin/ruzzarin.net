@@ -10,9 +10,7 @@ exports.get = function (req, res) {
         env: process.env.NODE_ENV,
         cdnUrl: config.cdnUrl,
         minified: config.minified,
-        name: "Alex Ruzzarin",
-        image: (config.cdnUrl ? config.cdnUrl : "http://"+ config.url) + "/images/Alex-Ruzzarin.jpg",
-        googlePlusUrl: "https://plus.google.com/+AlexRuzzarin/posts"
+        image: (config.cdnUrl ? config.cdnUrl : "http://"+ config.url) + "/images/Alex-Ruzzarin.jpg"
     };
     res.render('index', model);
 };

@@ -11,7 +11,7 @@ var fs = require('fs'),
     express = require('express'),
     bodyParser = require('body-parser'),
     compression = require('compression'),
-    //cookieParser = require('cookie-parser'),
+//cookieParser = require('cookie-parser'),
     helmet = require('helmet'),
     config = require('./config'),
     path = require('path'),
@@ -25,6 +25,7 @@ module.exports = function () {
     app.locals.title = config.app.title;
     app.locals.description = config.app.description;
     app.locals.keywords = config.app.keywords;
+    app.locals.social = config.social;
 
     // Force URL domain
     app.use(function (req, res, next) {

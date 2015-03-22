@@ -83,7 +83,7 @@ gulp.task('default', ['appHtml', 'appCss', 'appJs', 'appImages', 'appFonts', 'ap
 
 gulp.task('watch', ['default'], function () {
     plugins.livereload.listen();
-    gulp.watch(paths.css, ['appCss']);
+    gulp.watch([paths.css, 'app/style/**/*.less'], ['appCss']);
     gulp.watch(paths.js, ['appJs']);
     gulp.watch(paths.html, ['appHtml']);
     gulp.watch(paths.images, ['appImages']);

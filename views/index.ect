@@ -15,20 +15,16 @@
     <link rel="dns-prefetch" href="//ajax.googleapis.com/"/>
     <link rel="dns-prefetch" href="//fonts.gstatic.com/"/>
 
-
-    <meta name="description" content="<%- @description %>"/>
+    <meta name="author" itemprop="name" content="<%- @social.name %>"/>
+    <meta name="description" itemprop="description" content="<%- @description %>"/>
     <meta name="keywords" content="<%- @keywords %>"/>
-    <meta name="author" content="<%- @name %>"/>
 
-    <meta itemprop="name" content="<%- @name %>"/>
-    <meta itemprop="description" content="<%- @description %>"/>
-    <meta itemprop="image" content="<%- @image %>" />
-
+    <meta property="og:image" itemprop="image" content="<%- @image %>" />
     <meta property="og:title" content="<%- @title %>"/>
-    <meta property="og:image" content="<%- @image %>" />
     <meta property="og:description" content="<%- @description %>"/>
 
-    <link rel="author" href="<%- @googlePlusUrl %>"/>
+    <link rel="author" href="<%- @social.google %>"/>
+    <link itemprop="url" href="<%- @social.url %>" />
 
     <title><%= @title %></title>
 
@@ -41,16 +37,25 @@
     <div class="container">
         <ul class="nav navbar-nav pull-right">
             <li class="active">
-                <a href="https://www.linkedin.com/in/alexruzzarin/"><i class="fr fr-linkedin"></i></a>
+                <a itemprop="sameAs" href="<%- @social.facebook %>"><i class="fr fr-facebook"></i></a>
             </li>
             <li class="active">
-                <a href="https://www.facebook.com/alex.ruzzarin/"><i class="fr fr-facebook"></i></a>
+                <a itemprop="sameAs" href="<%- @social.twitter %>"><i class="fr fr-twitter"></i></a>
             </li>
             <li class="active">
-                <a href="https://twitter.com/alexruzzarin"><i class="fr fr-twitter"></i></a>
+                <a itemprop="sameAs" href="<%- @social.google %>"><i class="fr fr-gplus"></i></a>
             </li>
             <li class="active">
-                <a href="https://github.com/alexruzzarin/"><i class="fr fr-github"></i></a>
+                <a itemprop="sameAs" href="<%- @social.youtube %>"><i class="fr fr-youtube"></i></a>
+            </li>
+            <li class="active">
+                <a itemprop="sameAs" href="<%- @social.instagram %>"><i class="fr fr-instagram"></i></a>
+            </li>
+            <li class="active">
+                <a itemprop="sameAs" href="<%- @social.linkedin %>"><i class="fr fr-linkedin"></i></a>
+            </li>
+            <li class="active">
+                <a itemprop="sameAs" href="<%- @social.github %>"><i class="fr fr-github"></i></a>
             </li>
         </ul>
     </div>
@@ -65,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Alex Ruzzarin</a>
+            <a class="navbar-brand" href="#"><%- @social.name %></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <nav class="collapse navbar-collapse navbar-right" role="navigation">
@@ -81,8 +86,6 @@
     </div>
 </header>
 <ng-view></ng-view>
-
-
 <% if @env != 'production' : %>
 <script src="//localhost:35729/livereload.js"></script>
 <script src="/jss/angular<%- (@minified || '') %>.js"></script>
