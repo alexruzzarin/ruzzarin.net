@@ -14,6 +14,7 @@ import { envelope } from 'react-icons-kit/fa/envelope';
 
 const people = [
   {
+    key: 1,
     name: 'Alex Ruzzarin',
     photos: [
       'https://placeimg.com/640/480/people',
@@ -22,6 +23,7 @@ const people = [
     ]
   },
   {
+    key: 2,
     name: 'Alan Ruzzarin',
     photos: [
       'https://placeimg.com/640/480/nature',
@@ -30,6 +32,7 @@ const people = [
     ]
   },
   {
+    key: 3,
     name: 'Alex Ruzzarin',
     photos: [
       'https://placeimg.com/640/480/people',
@@ -38,6 +41,7 @@ const people = [
     ]
   },
   {
+    key: 4,
     name: 'Alan Ruzzarin',
     photos: [
       'https://placeimg.com/640/480/nature',
@@ -56,7 +60,7 @@ export default () => [
   </Header>,
   <Main key="main">
     {people.map(person => (
-      <Person key={person.name}>
+      <Person key={person.key}>
         {person.photos.map(photo => <Photo key={photo} src={photo} />)}
         <About>
           <Name>{person.name}</Name>

@@ -1,12 +1,19 @@
 import styled, { injectGlobal } from 'styled-components';
+import reboot from 'styled-reboot';
 import { withBaseIcon } from 'react-icons-kit';
-import { uiGroups, syntaxGroups } from 'nova-colors';
+import colorValues, { uiGroups, syntaxGroups } from 'nova-colors';
+
+const rebootCss = reboot({
+  fontFamilyBase: '"Courier New", Courier, monospace',
+  bodyColor: uiGroups.foreground,
+  bodyBg: uiGroups.background,
+  linkColor: syntaxGroups.identifier,
+  linkHoverColor: syntaxGroups.identifier,
+  textMuted: colorValues.grays.gray3
+});
 
 injectGlobal`
-  * {
-    padding: 0;
-    margin: 0;
-  }
+  ${rebootCss}
 
   html,
   body,
@@ -15,15 +22,8 @@ injectGlobal`
   #__next > div:first-child {
     display: flex;
     flex-direction: column;
-    font-size: 10px;
     height: 100%;
     min-height: 100%;
-  }
-
-  body {
-    color: ${uiGroups.foreground};
-    background-color: ${uiGroups.background};
-    font-family: "Courier New", Courier, monospace;
   }
 
   a {
@@ -57,7 +57,7 @@ export const HeaderLink = styled.a`
 
 export const Title = styled.h1`
   color: ${uiGroups.userCurrentState};
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 400;
 `;
 
@@ -68,13 +68,9 @@ export const Main = styled.main`
 
 export const Person = styled.section`
   display: flex;
-  height: 30rem;
 `;
 
 export const About = styled.div`
-  flex: 1;
-  flex-basis: 25%;
-  width: 25%;
   padding: 1.6rem;
 `;
 
@@ -93,6 +89,6 @@ export const Social = styled.div``;
 
 export const Photo = styled.img`
   flex: 1;
-  flex-basis: 25%;
-  width: 25%;
+  width: 28rem;
+  height: 21rem;
 `;
