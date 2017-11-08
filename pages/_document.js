@@ -15,7 +15,7 @@ export default class RuzzDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Ruzzarin.net</title>
+          <title>Família Ruzzarin</title>
           {this.props.styleTags}
         </Head>
         <body>
