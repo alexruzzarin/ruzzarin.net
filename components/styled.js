@@ -128,13 +128,10 @@ export const Name = styled.h2`
   font-size: 2rem;
   font-weight: 400;
   line-height: 1;
-
   ${Person}:hover & {
     color: ${syntaxGroups.emphasis};
   }
 `;
-
-export const Social = styled.div``;
 
 export const SocialLink = styled.a`
   color: ${uiGroups.userCurrentState};

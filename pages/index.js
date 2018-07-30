@@ -8,7 +8,6 @@ import {
   About,
   Name,
   Photo,
-  Social,
   SocialLink,
   SocialIcon
 } from '../components/styled';
@@ -116,10 +115,12 @@ export default () => [
   <Main key="main">
     {people.map(person => (
       <Person key={person.key} id={person.key}>
-        {person.photos.map(photo => <Photo key={photo} src={photo} />)}
+        {person.photos.map(photo => (
+          <Photo key={photo} src={photo} />
+        ))}
         <About>
           <Name>{person.name}</Name>
-          <Social>
+          <div>
             {person.links &&
               person.links.map(link => (
                 <SocialLink
@@ -131,7 +132,7 @@ export default () => [
                   <SocialIcon icon={link.icon} />
                 </SocialLink>
               ))}
-          </Social>
+          </div>
         </About>
       </Person>
     ))}
