@@ -16,6 +16,11 @@ export default class RuzzDocument extends Document {
       <html>
         <Head>
           <title>Família Ruzzarin</title>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
           {this.props.styleTags}
         </Head>
         <body>
