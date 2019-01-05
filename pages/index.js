@@ -1,4 +1,6 @@
+import Head from 'next/head';
 import {
+  GlobalStyle,
   Header,
   HeaderIcon,
   HeaderLink,
@@ -105,36 +107,44 @@ const people = [
   }
 ];
 
-export default () => [
-  <Header key="header">
-    <Title>Família Ruzzarin</Title>
-    <HeaderLink href="http://mail.ruzzarin.net">
-      <HeaderIcon icon={envelope} />
-    </HeaderLink>
-  </Header>,
-  <Main key="main">
-    {people.map(person => (
-      <Person key={person.key} id={person.key}>
-        {person.photos.map(photo => (
-          <Photo key={photo} src={photo} />
+export default function Index() {
+  return (
+    <>
+      <Head>
+        <title>Família Ruzzarin</title>
+      </Head>
+      <GlobalStyle />
+      <Header>
+        <Title>Família Ruzzarin</Title>
+        <HeaderLink href="http://mail.ruzzarin.net">
+          <HeaderIcon icon={envelope} />
+        </HeaderLink>
+      </Header>
+      <Main>
+        {people.map(person => (
+          <Person key={person.key} id={person.key}>
+            {person.photos.map(photo => (
+              <Photo key={photo} src={photo} />
+            ))}
+            <About>
+              <Name>{person.name}</Name>
+              <div>
+                {person.links &&
+                  person.links.map(link => (
+                    <SocialLink
+                      key={link.url}
+                      title={link.title}
+                      href={link.url}
+                      target="_blank"
+                    >
+                      <SocialIcon icon={link.icon} />
+                    </SocialLink>
+                  ))}
+              </div>
+            </About>
+          </Person>
         ))}
-        <About>
-          <Name>{person.name}</Name>
-          <div>
-            {person.links &&
-              person.links.map(link => (
-                <SocialLink
-                  key={link.url}
-                  title={link.title}
-                  href={link.url}
-                  target="_blank"
-                >
-                  <SocialIcon icon={link.icon} />
-                </SocialLink>
-              ))}
-          </div>
-        </About>
-      </Person>
-    ))}
-  </Main>
-];
+      </Main>
+    </>
+  );
+}

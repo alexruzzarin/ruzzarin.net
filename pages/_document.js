@@ -15,7 +15,6 @@ export default class RuzzDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Família Ruzzarin</title>
           <meta charSet="utf-8" />
           <meta
             name="viewport"

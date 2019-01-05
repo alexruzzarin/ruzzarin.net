@@ -1,4 +1,4 @@
-import styled, { injectGlobal } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import reboot from 'styled-reboot';
 import { withBaseIcon } from 'react-icons-kit';
 import colorValues, { uiGroups, syntaxGroups, ansiGroups } from 'nova-colors';
@@ -12,7 +12,7 @@ const rebootCss = reboot({
   textMuted: colorValues.grays.gray3
 });
 
-injectGlobal`
+export const GlobalStyle = createGlobalStyle`
   ${rebootCss}
 
   html {
@@ -128,7 +128,7 @@ export const Name = styled.h2`
   font-size: 2rem;
   font-weight: 400;
   line-height: 1;
-  ${Person}:hover & {
+  ${/* sc-selector */ Person}:hover & {
     color: ${syntaxGroups.emphasis};
   }
 `;
@@ -137,7 +137,7 @@ export const SocialLink = styled.a`
   color: ${uiGroups.userCurrentState};
   margin-right: 0.5rem;
 
-  ${Person}:hover & {
+  ${/* sc-selector */ Person}:hover & {
     color: ${ansiGroups.bright.magenta};
 
     &:hover {
