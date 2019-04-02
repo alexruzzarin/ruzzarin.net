@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "babel-plugin-styled-components": "1.10.0",
-    "next": "7.0.2",
+    "next": "8.0.4",
     "nova-colors": "2.1.5",
     "react": "16.7.0",
     "react-dom": "16.7.0",
