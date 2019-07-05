@@ -9,7 +9,7 @@ const rebootCss = reboot({
   bodyBg: uiGroups.background,
   linkColor: syntaxGroups.identifier,
   linkHoverColor: syntaxGroups.identifier,
-  textMuted: colorValues.grays.gray3
+  tableCaptionColor: colorValues.grays.gray3
 });
 
 export const GlobalStyle = createGlobalStyle`
