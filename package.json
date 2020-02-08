@@ -18,7 +18,7 @@
     "lint:css": "stylelint './components/**/*.js'"
   },
   "dependencies": {
-    "babel-plugin-styled-components": "1.10.6",
+    "babel-plugin-styled-components": "1.10.7",
     "next": "8.1.0",
     "nova-colors": "2.1.5",
     "react": "16.8.6",
