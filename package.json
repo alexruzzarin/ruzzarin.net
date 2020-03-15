@@ -28,7 +28,7 @@
     "styled-reboot": "4.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "10.0.2",
+    "babel-eslint": "10.1.0",
     "eslint": "6.0.1",
     "eslint-config-google": "0.13.0",
     "eslint-config-prettier": "6.0.0",
